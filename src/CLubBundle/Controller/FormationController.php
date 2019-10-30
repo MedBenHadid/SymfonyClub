@@ -6,7 +6,10 @@ use CLubBundle\Entity\Club;
 use CLubBundle\Entity\Formation;
 use CLubBundle\Form\ClubType;
 use CLubBundle\Form\FormationType;
+use CLubBundle\Form\RechercheType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 class FormationController extends Controller
@@ -31,8 +34,35 @@ class FormationController extends Controller
 
     public function rechercheFormationAction(Request $request)
     {
+        $invalid='';
         $formation = new Formation();
-        $form = this->$this->createForm(RechercheType ::class,$formation);
+        $defaultData = ['message' => 'Invalid !'];
+        $form = $this->createFormBuilder($defaultData)
+            ->add('Chercher', TextType::class, ['required'=> false])
+            ->add('send', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+        if($form->isSubmitted()&&$form->getData('Chercher')['Chercher']!=''){
+
+            $formation = $this->getDoctrine()
+                ->getRepository(Formation::class)
+                ->findBy(array('Titre'=>$form->getData('Chercher')['Chercher']));
+
+            if (empty($formation)){
+                $invalid="invalid serch";
+                return $this->render('@CLub/Formation/recherche.html.twig',array('Form'=>$form->createView(), 'invalid'=>$invalid ,'formations'=>$formation));
+            }
+
+            //var_dump($form->getData('Chercher')['Chercher']);
+
+        }else{
+            $formation =$this->getDoctrine()->getRepository(Formation::class)->findAll();
+//var_dump($formation);
+        }
+        return $this->render('@CLub/Formation/recherche.html.twig',array('Form'=>$form->createView(), 'invalid'=>$invalid,'formations'=>$formation));
+
+
     }
 
     public function AddFormationAction(Request $request){

@@ -4,13 +4,24 @@
 </head>
 
 <body>
-<form>
-<input type="text">
-<input type="submit" value="Chercher">
 
+    {{ form(Form) }}
 
-</form>
+    <table border="1">
+        {% for formation in formations %}
+            <tr>
+                <td>{{ formation.ref }}</td>
+                <td> {{ formation.Titre }}</td>
+                <td>{{ formation.description }}</td>
+                <td>{{ formation.datedebut|date('Y-m-d') }}</td>
+                <td>{{ formation.datefin|date('Y-m-d') }}</td>
+                <td>{{ formation.nbrParticipant }}</td>
+                <td>{{ formation.club.nom }}</td>
 
+            </tr>
+        {% endfor %}
+    </table>
 
+{{ invalid }}
 </body>
 </html>
