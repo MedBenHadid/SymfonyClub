@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>Show</title>
+</head>
+<body>
+<table border="1">
+    {% for formation in formations %}
+        <tr>
+            <td>{{ formation.ref }}</td>
+            <td> {{ formation.Titre }}</td>
+            <td>{{ formation.description }}</td>
+            <td>{{ formation.datedebut|date('Y-m-d') }}</td>
+            <td>{{ formation.datefin|date('Y-m-d') }}</td>
+            <td>{{ formation.nbrParticipant }}</td>
+            <td>{{ formation.club.nom }}</td>
+            <td><a href="{{path('updateFormation', {'id':formation.ref})  }}"><button>Modifier</button></a> </td>
+            <td><a href="{{path('deleteFormation', {'id':formation.ref})  }}"><button>Supprimer</button></a> </td>
+
+        </tr>
+    {% endfor %}
+</table>
+<a href="{{path('AddFormation')  }}"><button>ADD</button></a>
+
+</body>
+</html>

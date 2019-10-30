@@ -1,0 +1,30 @@
+{% extends '@CLub/layout.html.twig' %}
+{% block body %}
+{% if tab == NULL  %}
+<h1>pas de formation</h1>
+{% else %}
+<table border = "1">
+    <tr>
+    <td>{{'ref' | upper  }}  </td>
+    <td>title</td>
+    </tr>
+    {% for i in tab %}
+    <tr>
+        <td>{{ i.ref | upper }}</td>
+        <td>{{ i.title | upper }}</td>
+
+
+
+    <td>
+       <a href="{{ path('show' , {'title' : i.title , 'ref' :   i.ref }) }}" >
+
+            <button value="CLick" > click </button> </a>
+
+    </td>
+
+    </tr>
+    {%  endfor %}
+    {% endif %}
+</table>
+<h1>le nombre de tableau est {{ tab| length }}</h1>
+{% endblock %}

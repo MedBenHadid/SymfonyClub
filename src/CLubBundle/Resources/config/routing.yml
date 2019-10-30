@@ -1,0 +1,52 @@
+club_homepage:
+    path:     /index
+    defaults: { _controller: CLubBundle:Club:index }
+
+club_home:
+    path:     /afficher
+    defaults: { _controller: CLubBundle:Club:index }
+
+Club_page :
+    path :  /page
+    defaults : { _controller: CLubBundle:Club:Home }
+
+Club_detail :
+    path :  /read/{nom}
+    defaults : { _controller: CLubBundle:Club:read}
+Club_detail1 :
+    path :  /detail
+    defaults : { _controller: CLubBundle:Club:list}
+
+show :
+    path :  /show/{title}/{ref}
+    defaults : { _controller: CLubBundle:Club:show}
+
+find :
+    path :  /find
+    defaults : { _controller: CLubBundle:Club:findElement}
+update :
+    path : /update/{id}
+    defaults : { _controller: CLubBundle:Club:updateElement}
+delete :
+    path : /delete/{id}
+    defaults : { _controller: CLubBundle:Club:deleteElement}
+
+read :
+    path :  /readForm
+    defaults : { _controller: CLubBundle:Club:ReadForm}
+
+showFormation :
+    path : /showFormation
+    defaults : { _controller: CLubBundle:Formation:index}
+AddFormation:
+    path : /AddFormation
+    defaults: { _controller: CLubBundle:Formation:AddFormation}
+updateFormation :
+    path : /updateFormation/{id}
+    defaults : { _controller: CLubBundle:Formation:updateFormation}
+deleteFormation :
+    path : /deleteFormation/{id}
+    defaults : { _controller: CLubBundle:Formation:deleteFormation}
+rechercheFormation :
+    path : /rechercheFormation
+    defaults : { _controller: CLubBundle:Formation:rechercheFormation}
